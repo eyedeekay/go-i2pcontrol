@@ -2,6 +2,9 @@
 UNAME ?= $(shell uname -s | tr '[:upper:]' '[:lower:]')
 UARCH ?= $(shell uname -m | tr '[:upper:]' '[:lower:]' | sed 's|x86_64|amd64|g')
 
+check:
+	go build ..
+
 rebuild: clean update demo
 
 clean:

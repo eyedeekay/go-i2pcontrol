@@ -1,5 +1,10 @@
 package i2pcontrol
 
+
+import (
+    "strings"
+)
+
 type jsonStructure struct {
     echo string
 }
@@ -15,10 +20,12 @@ func (j *jsonStructure) Format(m string, s []string) string {
     rstring += "  jsonrpc: \"2.0\"\n"
     rstring += "  id: \"" + j.Id() + "\"\n"
     rstring += "  params: \""
+    var params string
     for _, value := range s {
-        rstring += value + " "
+        params += value + " "
     }
-    rstring += "\"\n"
+    p := strings.TrimRight(params, " ")
+    rstring += p + "\"\n"
     rstring += "}\n"
     return rstring
 }
