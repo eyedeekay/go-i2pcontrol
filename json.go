@@ -14,30 +14,29 @@ func (j *jsonStructure) Id() string {
     return rstring
 }
 
-func (j *jsonStructure) Format(m, e string, s ...string) string {
+func (j *jsonStructure) Format(m string, s ...string) string {
     rstring := "{\n"
     rstring += "  method: \"" + m +"\"\n"
     rstring += "  jsonrpc: \"2.0\"\n"
     rstring += "  id: \"" + j.Id() + "\"\n"
-    rstring += "  params: \""
+    rstring += "  params:"
     var params string
     for index, value := range s {
         if index != 0 && index%2 == 0 {
-            params += "  " + s[index-1] + ": \"" + value + "\""
+            params += strings.TrimRight("  " + s[index-1] + ": \"" + value + "\"", " ") + "\n"
         }
     }
-    p := strings.TrimRight(params, " ")
-    rstring += p + "\"\n"
+    rstring += params + "\n"
     rstring += "}\n"
     return rstring
 }
 
 func (j *jsonStructure) Authenticate(s ...string) string{
-    return j.Format("echo", "Authenticate", s...)
+    return j.Format("echo", s...)
 }
 
 func (j *jsonStructure) Echo(s ...string) string{
-    return j.Format("echo", "Echo", s...)
+    return j.Format("echo", s...)
 }
 
 func (j *jsonStructure) jsonStructure() jsonStructure {

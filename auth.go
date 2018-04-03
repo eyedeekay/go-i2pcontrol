@@ -20,8 +20,14 @@ func (i *i2pControlStructure) i2pControlDo(s ...string) string{
     return ""
 }
 
-func (i *i2pControlStructure) Echo(s ...string) (string, string) {
-    query := i.jsonstructure.Echo(s...)
+func (i *i2pControlStructure) Authenticate(s string) (string, string) {
+    query := i.jsonstructure.Authenticate("API" , "1", "Password", s)
+    fmt.Println(query)
+    response := i.i2pControlDo(query)
+    return query, response
+}
+func (i *i2pControlStructure) Echo(s string) (string, string) {
+    query := i.jsonstructure.Echo("API" , "1", "Token", s)
     fmt.Println(query)
     response := i.i2pControlDo(query)
     return query, response
