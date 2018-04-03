@@ -1,11 +1,17 @@
 package i2pcontrol
 
-import "fmt"
+import (
+    "fmt"
+    "net/rpc"
+)
 
 type i2pControlStructure struct {
     jsonstructure  *jsonStructure
     i2pcontrolhost string
     i2pcontrolport string
+    i2pcontroltoken string
+    i2pcontrolclient *rpc.Client
+    i2pcontrolerr error
 }
 
 func (i *i2pControlStructure) i2pControlHost() string{
@@ -16,20 +22,28 @@ func (i *i2pControlStructure) i2pControlPort() string{
     return i.i2pcontrolport
 }
 
-func (i *i2pControlStructure) i2pControlDo(s ...string) string{
-    return ""
+func (i *i2pControlStructure) i2pControlDo(method string, params ...string) string{
+    reply := ""
+    i.i2pcontrolerr = i.i2pcontrolclient.Call(method, params, &reply)
+    if i.i2pcontrolerr != nil {
+        fmt.Println("reply error")
+    }
+    return reply
 }
 
-func (i *i2pControlStructure) Authenticate(s string) (string, string) {
-    query := i.jsonstructure.Authenticate("API" , "1", "Password", s)
+func (i *i2pControlStructure) Authenticate(v, pw string) (string, string) {
+    query := i.jsonstructure.Authenticate("API" , v, "Password", pw)
     fmt.Println(query)
-    response := i.i2pControlDo(query)
+    response := i.i2pControlDo("Authenticate", pw)
     return query, response
 }
-func (i *i2pControlStructure) Echo(s string) (string, string) {
-    query := i.jsonstructure.Echo("API" , "1", "Token", s)
+func (i *i2pControlStructure) Echo(e string) (string, string) {
+    if i.i2pcontroltoken == "" {
+        return "", "i2pControl Auth Token not present."
+    }
+    query := i.jsonstructure.Echo("Token", i.i2pcontroltoken, "Echo", e)
     fmt.Println(query)
-    response := i.i2pControlDo(query)
+    response := i.i2pControlDo("Echo", e)
     return query, response
 }
 
@@ -46,6 +60,8 @@ func NewI2pControl(hostport ...string) *i2pControlStructure {
             i.i2pcontrolport = hostport[1]
         }
     }
+    i.i2pcontroltoken = ""
+    i.i2pcontrolclient, i.i2pcontrolerr = rpc.DialHTTP("tcp", i.i2pcontrolhost +":"+ i.i2pcontrolport )
     i.jsonstructure = NewJsonStructure()
     return &i
 }
