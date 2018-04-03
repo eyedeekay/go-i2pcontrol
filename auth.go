@@ -1,6 +1,6 @@
 package i2pcontrol
 
-import fmt
+import "fmt"
 
 type i2pControlStructure struct {
     jsonstructure  *jsonStructure
