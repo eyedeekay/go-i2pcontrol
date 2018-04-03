@@ -31,7 +31,7 @@ func (j *jsonStructure) jsonStructure() jsonStructure {
     return *j
 }
 
-func newJsonStructure() *jsonStructure {
+func NewJsonStructure() *jsonStructure {
     var j jsonStructure
     return &j
 }

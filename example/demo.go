@@ -15,5 +15,5 @@ func main(){
     i2pcontrolhost := *AddrString
     i2pcontrolport := *PortString
     auth := i2pcontrol.NewI2pControl(i2pcontrolhost, i2pcontrolport)
-    auth.Echo()
+    auth.Echo("test")
 }

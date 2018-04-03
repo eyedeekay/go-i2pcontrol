@@ -1,5 +1,7 @@
 package i2pcontrol
 
+import fmt
+
 type i2pControlStructure struct {
     jsonstructure  *jsonStructure
     i2pcontrolhost string
@@ -12,6 +14,10 @@ func (i *i2pControlStructure) i2pControlHost() string{
 
 func (i *i2pControlStructure) i2pControlPort() string{
     return i.i2pcontrolport
+}
+
+func (i *i2pControlStructure) Echo(s string) i2pControlStructure {
+    fmt.Println(i.jsonstructure.Echo("echo", ""))
 }
 
 func (i *i2pControlStructure) i2pControl() i2pControlStructure {
