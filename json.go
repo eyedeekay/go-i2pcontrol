@@ -26,8 +26,8 @@ func (j *jsonStructure) Format(m string, s ...string) string {
             params += strings.TrimRight("    \"" + s[index-1] + "\": \"" + value + "\"", " ") + "\n"
         }
     }
-    rstring += params + "  }"
-    rstring += "}\n"
+    rstring += params + "  }\n"
+    rstring += "}"
     return rstring
 }
 
