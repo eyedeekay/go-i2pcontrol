@@ -21,8 +21,10 @@ func (j *jsonStructure) Format(m string, s []string) string {
     rstring += "  id: \"" + j.Id() + "\"\n"
     rstring += "  params: \""
     var params string
-    for _, value := range s {
-        params += value + " "
+    for index, value := range s {
+        if index != 0 && index%2 == 0 {
+            params += "  " + s[index-1] + ": \"" + value + "\""
+        }
     }
     p := strings.TrimRight(params, " ")
     rstring += p + "\"\n"
