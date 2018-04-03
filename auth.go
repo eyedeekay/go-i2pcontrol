@@ -23,12 +23,12 @@ func (i *i2pControlStructure) i2pControlPort() string{
 }
 
 func (i *i2pControlStructure) i2pControlDo(method string, params ...string) string{
-    reply := ""
-    i.i2pcontrolerr = i.i2pcontrolclient.Call(method, params, &reply)
+    var reply *string
+    i.i2pcontrolerr = i.i2pcontrolclient.Call(method, params, reply)
     if i.i2pcontrolerr != nil {
         fmt.Println("reply error")
     }
-    return reply
+    return *reply
 }
 
 func (i *i2pControlStructure) Authenticate(v, pw string) (string, string) {
