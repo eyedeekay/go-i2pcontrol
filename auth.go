@@ -16,7 +16,7 @@ func (i *i2pControlStructure) i2pControlPort() string{
     return i.i2pcontrolport
 }
 
-func (i *i2pControlStructure) Echo(s string) i2pControlStructure {
+func (i *i2pControlStructure) Echo(s string) {
     fmt.Println(i.jsonstructure.Echo("echo", ""))
 }
 
@@ -33,6 +33,6 @@ func NewI2pControl(hostport ...string) *i2pControlStructure {
             i.i2pcontrolport = hostport[1]
         }
     }
-    i.jsonstructure = newJsonStructure()
+    i.jsonstructure = NewJsonStructure()
     return &i
 }
