@@ -11,10 +11,10 @@ func (j *jsonStructure) Id() string {
 
 func (j *jsonStructure) Format(m string, s []string) string {
     rstring := "{\n"
-    rstring += "method: \"" + m +"\"\n"
-    rstring += "jsonrpc: \"2.0\"\n"
-    rstring += "id: \"" + j.Id() + "\"\n"
-    rstring += "params: \""
+    rstring += "  method: \"" + m +"\"\n"
+    rstring += "  jsonrpc: \"2.0\"\n"
+    rstring += "  id: \"" + j.Id() + "\"\n"
+    rstring += "  params: \""
     for _, value := range s {
         rstring += value + " "
     }
