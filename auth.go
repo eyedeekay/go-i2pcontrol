@@ -18,7 +18,7 @@ func (i *i2pControlStructure) i2pControl() i2pControlStructure {
     return *i
 }
 
-func newI2pControl(hostport ...string) *i2pControlStructure {
+func NewI2pControl(hostport ...string) *i2pControlStructure {
     var i i2pControlStructure
     if hostport != nil {
         if len(hostport) > 0 {

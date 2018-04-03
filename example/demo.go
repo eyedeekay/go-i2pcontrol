@@ -4,7 +4,7 @@ import (
     "flag"
 )
 
-import i "github.com/eyedeekay/go-i2pcontrol"
+import "github.com/eyedeekay/go-i2pcontrol"
 
 func main(){
     AddrString := flag.String("host", "127.0.0.1",
@@ -14,6 +14,6 @@ func main(){
     flag.Parse()
     i2pcontrolhost := *AddrString
     i2pcontrolport := *PortString
-    auth := i.newI2pControl(i2pcontrolhost, i2pcontrolport)
-
+    auth := i2pcontrol.NewI2pControl(i2pcontrolhost, i2pcontrolport)
+    auth.Echo()
 }
