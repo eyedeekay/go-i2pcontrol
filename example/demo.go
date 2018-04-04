@@ -4,8 +4,6 @@ import (
     "flag"
 )
 
-//import "github.com/eyedeekay/go-i2pcontrol"
-
 import ".."
 
 func main(){
@@ -13,14 +11,21 @@ func main(){
 		"host: of the i2pcontrol interface")
 	PortString := flag.String("port", "7650",
 		":port of the i2pcontrol interface")
-
+    ApiVersion := flag.Int64("api", 1,
+		"version of the i2pcontrol interface")
+    Password := flag.String("pass", "default",
+		"password for authenticating to the i2pcontrol interface")
     flag.Parse()
 
+    apiversion := *ApiVersion
     i2pcontrolhost := *AddrString
     i2pcontrolport := *PortString
+    password := *Password
 
-    auth := i2pcontrol.NewI2pControl(i2pcontrolhost, i2pcontrolport)
+    i2pcontrol.I2pControlVerboseLogging = true
 
-    auth.Authenticate("1", "itoopie")
+    auth := i2pcontrol.NewI2pControl(apiversion, password, i2pcontrolhost, i2pcontrolport)
+
+    auth.Echo("i2pcontrol")
 
 }

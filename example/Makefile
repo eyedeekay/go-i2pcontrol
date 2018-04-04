@@ -5,6 +5,8 @@ UARCH ?= $(shell uname -m | tr '[:upper:]' '[:lower:]' | sed 's|x86_64|amd64|g')
 check:
 	go build ..
 
+r: rebuild
+
 rebuild: clean update demo
 
 clean:
@@ -19,7 +21,7 @@ demo:
 		-tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o demo-"$(UNAME)" \
-		./
+		./demo.go
 	./demo-linux
 
 demo-linux:
@@ -28,7 +30,7 @@ demo-linux:
 		-tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o demo-linux \
-		./
+		./demo.go
 
 demo-win:
 	GOOS=windows GOARCH="$(UARCH)" go build \
@@ -36,7 +38,7 @@ demo-win:
 		-tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o demo-win \
-		./
+		./demo.go
 
 
 demo-osx:
@@ -45,6 +47,9 @@ demo-osx:
 		-tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o demo-osx \
-		./
+		./demo.go
 
 all: demo-linux demo-win demo-osx
+
+curl:
+	/usr/bin/curl --data-binary '{"jsonrpc":"2.0","id":"curltext","method":"Authenticate","params":[ API: 1, Password: "default"]}' -H 'content-type:text/plain;' http://127.0.0.1:7650/
