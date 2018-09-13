@@ -52,4 +52,7 @@ demo-osx:
 all: demo-linux demo-win demo-osx
 
 curl:
-	/usr/bin/curl --data-binary '{"jsonrpc":"2.0","id":"curltext","method":"Authenticate","params":[ API: 1, Password: "default"]}' -H 'content-type:text/plain;' http://127.0.0.1:7650/
+	/usr/bin/curl -k --data-binary '{"jsonrpc":"2.0","id":"curltext","method":"Authenticate","params":{ "API": 1, "Password": "default"}}' -H 'content-type:application/json-rpc;' https://127.0.0.1:7650/
+
+gofmt:
+	gofmt -w ../*.go ./*.go
