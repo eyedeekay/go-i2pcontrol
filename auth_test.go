@@ -27,5 +27,9 @@ func TestAuth(t *testing.T) {
 	} else {
 		t.Log("Your I2P router doesn't need an update")
 	}
-
+	tunnels, err := ParticipatingTunnels()
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(tunnels, "Participating tunnels")
 }
