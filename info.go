@@ -2,6 +2,8 @@ package i2pcontrol
 
 import "fmt"
 
+
+// ParticipatingTunnels gets the number of participating tunnels the router has currently
 func ParticipatingTunnels() (int, error) {
 	retpre, err := Call("RouterInfo", map[string]interface{}{
 		"i2p.router.net.tunnels.participating": nil,
@@ -14,6 +16,7 @@ func ParticipatingTunnels() (int, error) {
 	return result, nil
 }
 
+//
 func Status() (string, error) {
 	retpre, err := Call("RouterInfo", map[string]interface{}{
 		"i2p.router.status": nil,
