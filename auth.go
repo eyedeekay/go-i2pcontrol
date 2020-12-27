@@ -3,7 +3,7 @@ package i2pcontrol
 import (
 	"crypto/tls"
 	"crypto/x509"
-	"github.com/ybbus/jsonrpc"
+	"github.com/ybbus/jsonrpc/v2"
 	"io/ioutil"
 	"net/http"
 )
