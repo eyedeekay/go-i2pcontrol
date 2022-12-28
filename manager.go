@@ -1,5 +1,6 @@
 package i2pcontrol
 
+// Echo test the API
 func Echo(echo string) (string, error) {
 	retpre, err := Call("Echo", map[string]interface{}{
 		"Echo":  echo,
@@ -12,6 +13,7 @@ func Echo(echo string) (string, error) {
 	return result, nil
 }
 
+// RestartGraceful initiates a graceful restart, which will occur in around 11 minutes.
 func RestartGraceful() (string, error) {
 	_, err := Call("RouterManager", map[string]interface{}{
 		"RestartGraceful": nil,
@@ -23,6 +25,7 @@ func RestartGraceful() (string, error) {
 	return "Graceful Restart Initiated", nil
 }
 
+// Restart the router immediately
 func Restart() (string, error) {
 	_, err := Call("RouterManager", map[string]interface{}{
 		"Restart": nil,
@@ -34,6 +37,7 @@ func Restart() (string, error) {
 	return "Restart Initiated", nil
 }
 
+// Shutdown initiates a graceful restart, which will occur in around 11 minutes.
 func ShutdownGraceful() (string, error) {
 	_, err := Call("RouterManager", map[string]interface{}{
 		"ShutdownGraceful": nil,
@@ -45,6 +49,7 @@ func ShutdownGraceful() (string, error) {
 	return "Graceful Shutdown Initiated", nil
 }
 
+// Shutdown the router immediately
 func Shutdown() (string, error) {
 	_, err := Call("RouterManager", map[string]interface{}{
 		"Shutdown": nil,
@@ -56,6 +61,7 @@ func Shutdown() (string, error) {
 	return "Shutdown Initiated", nil
 }
 
+// FindUpdates pings the server to check for updates
 func FindUpdates() (bool, error) {
 	retpre, err := Call("RouterManager", map[string]interface{}{
 		"FindUpdates": nil,
@@ -68,6 +74,7 @@ func FindUpdates() (bool, error) {
 	return result, nil
 }
 
+// Starts an update.
 func Update() (string, error) {
 	_, err := Call("RouterManager", map[string]interface{}{
 		"Update": nil,

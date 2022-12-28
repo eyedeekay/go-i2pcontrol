@@ -1,6 +1,6 @@
 
 USER_GH=eyedeekay
-VERSION=0.1.4
+VERSION=0.1.5
 packagename=go-i2pcontrol
 
 echo:

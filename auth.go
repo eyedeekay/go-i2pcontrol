@@ -3,9 +3,10 @@ package i2pcontrol
 import (
 	"crypto/tls"
 	"crypto/x509"
-	"github.com/ybbus/jsonrpc/v2"
 	"io/ioutil"
 	"net/http"
+
+	"github.com/ybbus/jsonrpc/v2"
 )
 
 var (
@@ -14,7 +15,7 @@ var (
 	token     string
 )
 
-//
+// Initialize set up the rpcClient with the specified host, port, and path
 func Initialize(host, port, path string) {
 	RPCOpts = &jsonrpc.RPCClientOpts{
 		HTTPClient: &http.Client{
@@ -28,6 +29,7 @@ func Initialize(host, port, path string) {
 	rpcClient = jsonrpc.NewClientWithOpts("http://"+host+":"+port+"/"+path+"/", RPCOpts)
 }
 
+// InitializeWithSelfSignedCert will set up an rpcClient which will accept a self-signed certificate, at the path speciied by cert.
 func InitializeWithSelfSignedCert(host, port, path, cert string) error {
 	caCert, err := ioutil.ReadFile(cert)
 	if err != nil {
@@ -44,10 +46,11 @@ func InitializeWithSelfSignedCert(host, port, path, cert string) error {
 			},
 		},
 	}
-	rpcClient = jsonrpc.NewClientWithOpts("http://"+host+":"+port+"/"+path+"/", RPCOpts)
+	rpcClient = jsonrpc.NewClientWithOpts("https://"+host+":"+port+"/"+path+"/", RPCOpts)
 	return nil
 }
 
+// Call an RPC method with params
 func Call(method string, params interface{}) (map[string]interface{}, error) {
 	response, err := rpcClient.Call(method, params)
 	if err != nil {
@@ -62,6 +65,7 @@ func Call(method string, params interface{}) (map[string]interface{}, error) {
 	return retpre, nil
 }
 
+// Authenticate to the RPC API with a password
 func Authenticate(password string) (int, error) {
 	retpre, err := Call("Authenticate", map[string]interface{}{
 		"API":      1,

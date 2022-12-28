@@ -2,7 +2,6 @@ package i2pcontrol
 
 import "fmt"
 
-
 // ParticipatingTunnels gets the number of participating tunnels the router has currently
 func ParticipatingTunnels() (int, error) {
 	retpre, err := Call("RouterInfo", map[string]interface{}{
@@ -16,7 +15,7 @@ func ParticipatingTunnels() (int, error) {
 	return result, nil
 }
 
-//
+// Status queries the status of the router
 func Status() (string, error) {
 	retpre, err := Call("RouterInfo", map[string]interface{}{
 		"i2p.router.status": nil,
@@ -29,6 +28,7 @@ func Status() (string, error) {
 	return result, nil
 }
 
+// NetStatus queries the status of the network connection
 func NetStatus() (string, error) {
 	retpre, err := Call("RouterInfo", map[string]interface{}{
 		"i2p.router.net.status": nil,
@@ -73,6 +73,7 @@ func NetStatus() (string, error) {
 	return "Unexpected result", fmt.Errorf("Unexpected result %d", result)
 }
 
+// Reseeding checks if the I2P Router is reseeding
 func Reseeding() (bool, error) {
 	retpre, err := Call("Routerinfo", map[string]interface{}{
 		"i2p.router.netdb.isreseeding": nil,
