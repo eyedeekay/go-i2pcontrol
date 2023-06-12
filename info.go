@@ -70,7 +70,7 @@ func NetStatus() (string, error) {
 	case 14:
 		return "ERROR_UDP_DISABLED_AND_TCP_UNSET", nil
 	}
-	return "Unexpected result", fmt.Errorf("Unexpected result %d", result)
+	return "unexpected result", fmt.Errorf("unexpected result %d", result)
 }
 
 // Reseeding checks if the I2P Router is reseeding

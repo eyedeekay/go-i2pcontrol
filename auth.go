@@ -62,6 +62,9 @@ func Call(method string, params interface{}) (map[string]interface{}, error) {
 	//var retv string
 	var retpre map[string]interface{}
 	err = response.GetObject(&retpre)
+	if err != nil {
+		return nil, err
+	}
 	return retpre, nil
 }
 
