@@ -56,21 +56,22 @@ func NetStatus() (string, error) {
 	case 7:
 		return "WARN_FIREWALLED_WITH_UDP_DISABLED", nil
 	case 8:
-		return "ERROR_I2CP", nil
+		return "ERROR_I2CP", fmt.Errorf("I2CP error")
 	case 9:
-		return "ERROR_CLOCK_SKEW", nil
+		return "ERROR_CLOCK_SKEW", fmt.Errorf("Clock skew error")
 	case 10:
-		return "ERROR_PRIVATE_TCP_ADDRESS", nil
+		return "ERROR_PRIVATE_TCP_ADDRESS", fmt.Errorf("Private TCP address error")
 	case 11:
-		return "ERROR_SYMMETRIC_NAT", nil
+		return "ERROR_SYMMETRIC_NAT", fmt.Errorf("Symmetric NAT error")
 	case 12:
-		return "ERROR_UDP_PORT_IN_USE", nil
+		return "ERROR_UDP_PORT_IN_USE", fmt.Errorf("UDP port in use error")
 	case 13:
-		return "ERROR_NO_ACTIVE_PEERS_CHECK_CONNECTION_AND_FIREWALL", nil
+		return "ERROR_NO_ACTIVE_PEERS_CHECK_CONNECTION_AND_FIREWALL", fmt.Errorf("No active peers check connection and firewall")
 	case 14:
-		return "ERROR_UDP_DISABLED_AND_TCP_UNSET", nil
+		return "ERROR_UDP_DISABLED_AND_TCP_UNSET", fmt.Errorf("UDP disabled and TCP unset")
+	default:
+		return  "unexpected result", fmt.Errorf("unexpected result  %d", result)
 	}
-	return "unexpected result", fmt.Errorf("unexpected result %d", result)
 }
 
 // Reseeding checks if the I2P Router is reseeding
