@@ -1,4 +1,4 @@
-module github.com/eyedeekay/go-i2pcontrol
+module github.com/go-i2p/go-i2pcontrol
 
 go 1.16
 
