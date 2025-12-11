@@ -1,5 +1,5 @@
 
-USER_GH=eyedeekay
+USER_GH=go-i2p
 VERSION=0.1.6
 packagename=go-i2pcontrol
 

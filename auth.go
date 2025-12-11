@@ -4,7 +4,9 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"io/ioutil"
+	"net"
 	"net/http"
+	"strings"
 
 	"github.com/ybbus/jsonrpc/v2"
 )
@@ -26,7 +28,9 @@ func Initialize(host, port, path string) {
 			},
 		},
 	}
-	rpcClient = jsonrpc.NewClientWithOpts("http://"+host+":"+port+"/"+path+"/", RPCOpts)
+	addr := net.JoinHostPort(host, port)
+	path = strings.TrimLeft(path, "/")
+	rpcClient = jsonrpc.NewClientWithOpts("http://"+addr+"/"+path+"/", RPCOpts)
 }
 
 // InitializeWithSelfSignedCert will set up an rpcClient which will accept a self-signed certificate, at the path speciied by cert.
