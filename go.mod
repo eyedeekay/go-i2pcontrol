@@ -1,5 +1,5 @@
 module github.com/go-i2p/go-i2pcontrol
 
-go 1.16
+go 1.24.4
 
 require github.com/ybbus/jsonrpc/v2 v2.1.7
