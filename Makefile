@@ -1,6 +1,6 @@
 
 USER_GH=go-i2p
-VERSION=0.1.6
+VERSION=0.1.7
 packagename=go-i2pcontrol
 
 echo:
