@@ -5,6 +5,19 @@ import (
 	"log"
 )
 
+func RateStatExact(Stat string, Period int) (float64, error) {
+	retpre, err := Call("GetRate", map[string]interface{}{
+		"Stat":   Stat,
+		"Period": Period,
+		"Token":  token,
+	})
+	if err != nil {
+		return -1, err
+	}
+	result := retpre["Result"].(float64)
+	return result, nil
+}
+
 // RateStat executes a GetRate call
 func RateStat(Stat string, Period int) (int, error) {
 	retpre, err := Call("GetRate", map[string]interface{}{
@@ -25,6 +38,30 @@ func SendBps() (int, error) {
 
 func ReceiveBps() (int, error) {
 	return RateStat("bw.receiveBps", 300000)
+}
+
+func SendBpsHourAverage() (int, error) {
+	return RateStat("bw.sendBps", 3600000)
+}
+
+func ReceiveBpsHourAverage() (int, error) {
+	return RateStat("bw.receiveBps", 3600000)
+}
+
+func ParticipatingHourAverageTunnels() (int, error) {
+	return RateStat("tunnel.participatingTunnels", 3600000)
+}
+
+func ParticipatingAverageTunnels() (int, error) {
+	return RateStat("tunnel.participatingTunnels", 300000)
+}
+
+func ClientBuildSuccess() (int, error) {
+	return RateStat("tunnel.buildClientSuccess", 600000)
+}
+
+func BuildRequestTime() (float64, error) {
+	return RateStatExact("tunnel.buildRequestTime", 600000)
 }
 
 func ExploratoryBuildExpire() (int, error) {

@@ -63,7 +63,7 @@ func Call(method string, params interface{}) (map[string]interface{}, error) {
 	if response.Error != nil {
 		return nil, response.Error
 	}
-	//var retv string
+	// var retv string
 	var retpre map[string]interface{}
 	err = response.GetObject(&retpre)
 	if err != nil {
@@ -76,7 +76,7 @@ func Call(method string, params interface{}) (map[string]interface{}, error) {
 func Authenticate(password string) (int, error) {
 	retpre, err := Call("Authenticate", map[string]interface{}{
 		"API":      1,
-		"Password": "itoopie",
+		"Password": password,
 	})
 	if err != nil {
 		return -1, err
